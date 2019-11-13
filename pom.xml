@@ -15,8 +15,41 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <docker.repository>hub.docker.com</docker.repository>
+        <docker.imageName>springboot-demo</docker.imageName>
         <java.version>11</java.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>appService-dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+               <env.type>dev-${project.version}</env.type>
+               <docker.project>wangshuai6510</docker.project>
+            </properties>
+        </profile>
+    </profiles>
+    <profiles>
+        <profile>
+            <id>appService-pub</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>pub</value>
+                </property>
+            </activation>
+            <properties>
+                <env.type>pub-${project.version}</env.type>
+                <docker.project>wangshuai6510</docker.project>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -42,7 +75,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <imageName>springboot-demo-${project.version}</imageName>
+                    <imageName>${docker.repository}/${docker.project}/${docker.imageName}:${env.type}</imageName>
                     <baseImage>adoptopenjdk/openjdk11</baseImage>
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                     <resources>
