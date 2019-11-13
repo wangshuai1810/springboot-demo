@@ -34,8 +34,7 @@
                <docker.project>wangshuai6510</docker.project>
             </properties>
         </profile>
-    </profiles>
-    <profiles>
+
         <profile>
             <id>appService-pub</id>
             <activation>
@@ -49,6 +48,7 @@
                 <docker.project>wangshuai6510</docker.project>
             </properties>
         </profile>
+
     </profiles>
 
     <dependencies>
