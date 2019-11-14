@@ -64,6 +64,22 @@
     </dependencies>
 
     <build>
+        <resources><!-- 使用@@占位符，输出Dockerfile至docker文件夹 -->
+            <resource>
+                <directory>src/docker</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/Dockerfile</include>
+                </includes>
+                <targetPath>../docker</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
